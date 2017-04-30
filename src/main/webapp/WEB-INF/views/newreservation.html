@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ELTE-cinema</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="/js/reservation.js"></script>
+    <script type="text/javascript" src="/awesomplete/awesomplete.js"></script>
+    <link rel="stylesheet" href="/awesomplete/awesomplete.css"/>
+</head>
+<body>
+
+<div th:replace="fragments/navbar"/>
+<div class="container" id="newresrvation_main_container">
+    <form action="#" th:action="@{/reservation/getScreeningById}" th:object="${simpleDto}" method="get">
+        <div class="form-group" th:object="${simpleDto}" >
+            <label th:text="#{screening.selector}"></label>
+            <select th:field="*{id}" class="form-control">
+                <option th:each="item : ${screeningList}" th:text="${item.getMovieTitle()}" th:value="${item.getId()}"></option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-default" value="Submit" />
+    </form>
+    <form action="#" th:action="@{/reservation//saveReservation}" th:object="${ticketDto}" method="post">
+        <div class="form-group">
+            <label th:text="#{ticket.movie.title}"></label>
+            <input type="text" class="form-control" th:value="${screeningDto.getMovieTitle()}" readonly/>
+        </div>
+        <div class="form-group">
+            <label th:text="#{ticket.movie.id}"></label>
+            <input type="number" class="form-control" th:value="${movieDto.getId()}" id="movieId" name="movieId" readonly />
+        </div>
+        <div class="form-group">
+            <label th:text="#{ticket.screening.start}"></label>
+            <input type="text" class="form-control" th:value="${screeningDto.date}" readonly/>
+        </div>
+        <div class="form-group">
+            <label th:text="#{ticket.screening.id}"></label>
+            <input type="number" class="form-control" th:value="${screeningDto.getId()}" id="screeningId" name="screeningId" readonly/>
+        </div>
+        <div class="form-group">
+            <label th:text="#{ticket.person.name}"></label>
+            <input type="text" class="form-control" th:field="*{name}" />
+        </div>
+        <div class="form-group">
+            <label th:text="#{ticket.person.age}"></label>
+            <input type="number" class="form-control" th:field="*{age}">
+        </div>
+        <div class="form group">
+            <label th:text="#{ticket.seat}"></label>
+        </div>
+        <div class="form-group">
+            <label th:text="#{ticket.seat.row}"></label>
+            <input type="number" class="form-control" th:field="*{seatX}" />
+        </div>
+        <div class="form-group">
+            <label th:text="#{ticket.seat.column}"></label>
+            <input type="number" class="form-control" th:field="*{seatY}" />
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-default" value="Submit" />
+        </div>
+    </form>
+</div>
+</body>
+<script>
+</script>
+</html>

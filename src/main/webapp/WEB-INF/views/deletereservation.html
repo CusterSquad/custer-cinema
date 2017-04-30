@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ELTE-cinema</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/movie.js"></script>
+</head>
+<body>
+<div th:replace="fragments/navbar"/>
+<div class="container">
+    <form action="#" th:action="@{/deleteReservationById}" th:object="${simpleDto}" method="post">
+        <div class="form-group" th:object="${simpleDto}" >
+            <label th:text="#{movie.seletor}"></label>
+            <select th:field="*{id}" class="form-control">
+                <option th:each="item : ${reservationList}" th:text="${item.getName()} + ${item.getMovieTitle()}" th:value="${item.getId()}"></option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-default" value="Submit" />
+    </form>
+</div>
+</body>
+</html>

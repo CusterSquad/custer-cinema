@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head>
+        <title>ELTE-cinema</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+</head>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">ELTE-Cinema</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li id="home_li"><a href="/">Home</a></li>
+                <li id="newmovie_li" th:action="@{/newmovie}"><a href="newmovie.html">Add new movie</a></li>
+                <li id="newscreening_li" th:action="@{/newscreening}"><a href="newscreening.html">Add new screening</a></li>
+                <li id="newreseration_li" th:action="@{/newreservation}"><a href="newreservation.html">Add new reservation</a></li>
+                <li id="modifymovie_li" th:action="@{/modifymovie}"><a href="modifymovie.html">Modify movie</a></li>
+                <li id="modifyscreening_li" th:action="@{/modifyscreening}"><a href="modifyscreening.html" >Modify screening</a></li>
+                <li id="modifyreservation_li" th:action="@{/modifyreservation}"><a href="modifyreservation.html">Modify reservation</a></li>
+                <li id="deletemovie_li" th:action="@{/deletemovie}"><a href="deletemovie.html">Delete Movie</a></li>
+                <li id="deletereservation_li" th:action="@{/deletereservation}"><a href="deletereservation.html">Delete Reservation</a></li>
+                <li id="deletescreening_li" th:action="@{/deletescreening}"><a href="deletescreening.html">Delete Screening</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</html>
