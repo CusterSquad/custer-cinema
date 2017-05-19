@@ -30,7 +30,7 @@ public class Room implements ModelInterface<Integer>{
     @Column(name = "MAX_COL", nullable = false)
     private Integer maxColumnNumber;
 
-    @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.PERSIST}, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Seat> seats;
     @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.PERSIST}, orphanRemoval = true)

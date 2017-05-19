@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@PropertySource({ "classpath:selectors.properties" })
+@PropertySource({ "classpath:application.properties" })
 public class SelectorProperties {
 
     @Autowired
@@ -17,7 +17,7 @@ public class SelectorProperties {
 
 
     public List<String> getDubbedSelectorList() {
-        String temp = environment.getRequiredProperty("dubbed");
+        String temp = environment.getRequiredProperty("isDubbed");
         return Arrays.asList(temp.split(","));
     }
     public List<String> getAgeLimitSelectorList() {

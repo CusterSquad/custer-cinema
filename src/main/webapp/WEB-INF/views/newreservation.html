@@ -15,7 +15,7 @@
 
 <div th:replace="fragments/navbar"/>
 <div class="container" id="newresrvation_main_container">
-    <form action="#" th:action="@{/reservation/getScreeningById}" th:object="${simpleDto}" method="get">
+    <form action="#" th:action="@{/findScreeningById}" th:object="${simpleDto}" method="get">
         <div class="form-group" th:object="${simpleDto}" >
             <label th:text="#{screening.selector}"></label>
             <select th:field="*{id}" class="form-control">
@@ -24,7 +24,7 @@
         </div>
         <input type="submit" class="btn btn-default" value="Submit" />
     </form>
-    <form action="#" th:action="@{/reservation//saveReservation}" th:object="${ticketDto}" method="post">
+    <form action="#" th:action="@{/saveReservation}" th:object="${ticketDto}" method="post">
         <div class="form-group">
             <label th:text="#{ticket.movie.title}"></label>
             <input type="text" class="form-control" th:value="${screeningDto.getMovieTitle()}" readonly/>

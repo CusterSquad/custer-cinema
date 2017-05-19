@@ -29,7 +29,7 @@ public class ReservationController {
     @Autowired
     private ServiceProvider serviceProvider;
 
-    @RequestMapping(value = "/reservation/saveReservation", method = RequestMethod.POST)
+    @RequestMapping(value = "/saveReservation", method = RequestMethod.POST)
     public ModelAndView saveReservation(@ModelAttribute("ticketDto") TicketDto ticketDto, @ModelAttribute("roomDto")RoomDto roomDto, BindingResult errors, Model model) {
         CustomResponse response = serviceProvider.getService(Ticket.class).addNewReservation(ticketDto);
         if(response.getResponseEnum() == ResponseEnum.SUCCESS) {
@@ -58,7 +58,7 @@ public class ReservationController {
         }
     }
 
-    @RequestMapping(value = "/reservation/getScreeningById", method = RequestMethod.GET)
+    @RequestMapping(value = "/findScreeningById", method = RequestMethod.GET)
     public ModelAndView getScreeningById(@ModelAttribute("simpleDto") SimpleDto simpleDto,@ModelAttribute("ticketDto")TicketDto ticketDto, BindingResult errors, Model model) {
         ScreeningDto result = (ScreeningDto) serviceProvider.getService(Screening.class).findById(simpleDto.getId()).getData();
         ModelAndView mav = new ModelAndView("newreservation");
