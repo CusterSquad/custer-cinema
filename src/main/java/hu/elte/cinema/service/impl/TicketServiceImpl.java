@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Transactional
 public class TicketServiceImpl extends AbstractCrudServiceImpl<Ticket, TicketDto, Integer>
     implements TicketService {
@@ -63,6 +65,7 @@ public class TicketServiceImpl extends AbstractCrudServiceImpl<Ticket, TicketDto
 
     @Override
     public void deleteReservation(Integer id) throws Exception {
+        Objects.requireNonNull(id, "The id to be deleted must not be null.");
         Ticket selectedTicket = ticketDao.findById(id);
         Room room = selectedTicket.getScreening().getRoom();
         Seat seat = room.getSeat(selectedTicket.getSeatX(), selectedTicket.getSeatY());

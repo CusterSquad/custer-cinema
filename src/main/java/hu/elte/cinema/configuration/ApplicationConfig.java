@@ -1,7 +1,6 @@
 package hu.elte.cinema.configuration;
 
 
-import hu.elte.cinema.configuration.properties.SelectorProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

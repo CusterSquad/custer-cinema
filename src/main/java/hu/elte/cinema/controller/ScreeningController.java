@@ -8,6 +8,7 @@ import hu.elte.cinema.model.Room;
 import hu.elte.cinema.model.Screening;
 import hu.elte.cinema.response.CustomResponse;
 import hu.elte.cinema.response.ResponseEnum;
+import hu.elte.cinema.util.ModelAndViewUtil;
 import hu.elte.cinema.util.ServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +31,9 @@ public class ScreeningController {
     public ModelAndView saveScreening(@ModelAttribute("screeningDto")ScreeningDto screeningDto, BindingResult errors, Model model) {
         CustomResponse response = serviceProvider.getService(Screening.class).addNewScreening(screeningDto);
         if(response.getResponseEnum() == ResponseEnum.SUCCESS) {
-            return new ModelAndView("success");
+            return ModelAndViewUtil.getView("success");
         } else {
-            return new ModelAndView("error");
+            return ModelAndViewUtil.getView("error", response.getMessage());
         }
     }
     @RequestMapping(value = "/getScreeningById", method = RequestMethod.POST)
@@ -46,20 +47,20 @@ public class ScreeningController {
     }
     @RequestMapping(value = "/modifyScreening", method = RequestMethod.POST)
     public ModelAndView modifyScreening(@ModelAttribute("screeningDto") ScreeningDto screeningDto, BindingResult errors, Model model) {
-        CustomResponse result = serviceProvider.getService(Screening.class).update(screeningDto);
-        if(result.getResponseEnum() == ResponseEnum.SUCCESS) {
-            return new ModelAndView("success");
+        CustomResponse response = serviceProvider.getService(Screening.class).update(screeningDto);
+        if(response.getResponseEnum() == ResponseEnum.SUCCESS) {
+            return ModelAndViewUtil.getView("success");
         } else {
-            return new ModelAndView("error");
+            return ModelAndViewUtil.getView("error", response.getMessage());
         }
     }
     @RequestMapping(value = "/deleteScreeningById", method = RequestMethod.POST)
     public ModelAndView deleteScreeningById(@ModelAttribute("simpleDto")SimpleDto simpleDto, BindingResult erros, Model model) {
         CustomResponse response = serviceProvider.getService(Screening.class).deleteScreening(simpleDto);
         if(response.getResponseEnum() == ResponseEnum.SUCCESS) {
-            return new ModelAndView("success");
+            return ModelAndViewUtil.getView("success");
         } else {
-            return new ModelAndView("error");
+            return ModelAndViewUtil.getView("error", response.getMessage());
         }
     }
 }

@@ -12,7 +12,9 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Transactional
@@ -70,7 +72,12 @@ public class ScreeingServiceImpl extends AbstractCrudServiceImpl<Screening, Scre
                 ticketDao.deleteEntity(ticket);
             }
         }
-
+        Date screeningDate = selectedScreening.getDate();
+        Collection<Occupied> occupiedCollection = selectedScreening.getRoom().getOccupied();
+        Occupied temp = occupiedCollection.stream().filter(item -> item.getFrom().equals(screeningDate)).findFirst().get();
+        occupiedCollection.remove(temp);
+        roomDao.updateEntity(selectedScreening.getRoom());
+        occupiedDao.deleteEntity(temp);
         screeningDao.deleteEntity(selectedScreening);
     }
 }

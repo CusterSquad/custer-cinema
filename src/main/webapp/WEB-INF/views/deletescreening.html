@@ -13,7 +13,7 @@
 <div class="container">
     <form action="#" th:action="@{/deleteScreeningById}" th:object="${simpleDto}" method="post">
         <div class="form-group" th:object="${simpleDto}" >
-            <label th:text="#{movie.seletor}"></label>
+            <label th:text="#{screening.selector}"></label>
             <select th:field="*{id}" class="form-control">
                 <option th:each="item : ${screeningList}" th:text="${item.getMovieTitle()} + ${item.getDate()}" th:value="${item.getId()}"></option>
             </select>

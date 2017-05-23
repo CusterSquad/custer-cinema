@@ -12,6 +12,7 @@ import hu.elte.cinema.service.interfaces.CrudService;
 import hu.elte.cinema.service.interfaces.ScreeningService;
 import hu.elte.cinema.service.interfaces.TicketService;
 import hu.elte.cinema.util.Wrapper;
+import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -20,6 +21,7 @@ public class AdminService {
 
     private final CrudService crudService;
     private final CustomResponseFactory customResponseFactory;
+    private static Logger logger = Logger.getLogger(AdminService.class);
     public AdminService(CrudService<?, DtoInterface, String> crudService, CustomResponseFactory customResponseFactory) {
         this.crudService = crudService;
         this.customResponseFactory = customResponseFactory;
@@ -30,6 +32,7 @@ public class AdminService {
         try {
             response = customResponseFactory.successfullResponse(crudService.list());
         } catch (Exception ex) {
+            logger.error(ex);
             response = customResponseFactory.errorResponse(ex);
         }
         return response;
@@ -40,6 +43,7 @@ public class AdminService {
             crudService.create(dtoObject);
             response = customResponseFactory.successfullResponse();
         } catch (Exception ex) {
+            logger.error(ex);
             response = customResponseFactory.errorResponse(ex);
         }
         return response;
@@ -50,6 +54,7 @@ public class AdminService {
             crudService.update(dtoObject);
             response = customResponseFactory.successfullResponse();
         } catch (Exception ex) {
+            logger.error(ex);
             response = customResponseFactory.errorResponse(ex);
         }
         return response;
@@ -61,6 +66,7 @@ public class AdminService {
             crudService.delete(temp);
             response = customResponseFactory.successfullResponse();
         } catch (Exception ex) {
+            logger.error(ex);
             response = customResponseFactory.errorResponse(ex);
         }
         return response;
@@ -71,6 +77,7 @@ public class AdminService {
             DtoInterface dtoObject = (DtoInterface) crudService.findById(id);
             response = customResponseFactory.successfullResponse(dtoObject);
         } catch (Exception ex) {
+            logger.error(ex);
             response = customResponseFactory.errorResponse(ex);
         }
         return response;
@@ -92,6 +99,7 @@ public class AdminService {
             screeningService.createNewScreening(screeningDto);
             response = customResponseFactory.successfullResponse();
         } catch (Exception ex) {
+            logger.error(ex);
             response = customResponseFactory.errorResponse(ex);
         }
         return response;
@@ -103,6 +111,7 @@ public class AdminService {
             ticketService.createNewReservation(ticketDto);
             response = customResponseFactory.successfullResponse();
         } catch (Exception ex) {
+            logger.error(ex);
             response = customResponseFactory.errorResponse(ex);
         }
         return response;
@@ -114,6 +123,7 @@ public class AdminService {
             screeningService.deleteScreeningById(simpleDto.getId());
             response = customResponseFactory.successfullResponse();
         } catch (Exception ex) {
+            logger.error(ex);
             response = customResponseFactory.errorResponse(ex);
         }
         return response;
@@ -125,6 +135,7 @@ public class AdminService {
             ticketService.deleteReservation(simpleDto.getId());
             response = customResponseFactory.successfullResponse();
         } catch (Exception ex) {
+            logger.error(ex);
             response = customResponseFactory.errorResponse(ex);
         }
         return response;

@@ -14,7 +14,7 @@
 <div class="container" id="modifyreservation_main_container">
     <form id="movieSelect"  action="#" th:action="@{/getTicketById}" th:object="${simpleDto}" method="post">
         <div class="form-group" th:object="${simpleDto}" >
-            <label th:text="#{screening.selector}"></label>
+            <label th:text="#{reservation.seletor}"></label>
             <select th:field="*{id}" class="form-control">
                 <option th:each="item : ${ticketList}" th:text="${item.getName()}" th:value="${item.getId()}"></option>
             </select>
@@ -41,22 +41,22 @@
             </div>
             <div class="form-group">
                 <label th:text="#{ticket.person.name}"></label>
-                <input type="text" class="form-control" th:field="*{name}" />
+                <input type="text" class="form-control" th:field="*{name}" required />
             </div>
             <div class="form-group">
                 <label th:text="#{ticket.person.age}"></label>
-                <input type="number" class="form-control" th:field="*{age}">
+                <input type="number" class="form-control" th:field="*{age}" required />
             </div>
             <div class="form group">
                 <label th:text="#{ticket.seat}"></label>
             </div>
             <div class="form-group">
                 <label th:text="#{ticket.seat.row}"></label>
-                <input type="number" class="form-control" th:field="*{seatX}" />
+                <input type="number" class="form-control" th:field="*{seatX}" required />
             </div>
             <div class="form-group">
                 <label th:text="#{ticket.seat.column}"></label>
-                <input type="number" class="form-control" th:field="*{seatY}" />
+                <input type="number" class="form-control" th:field="*{seatY}" required />
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-default" value="Submit" />

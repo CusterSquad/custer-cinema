@@ -13,7 +13,7 @@
 <div class="container">
     <form action="#" th:action="@{/deleteReservationById}" th:object="${simpleDto}" method="post">
         <div class="form-group" th:object="${simpleDto}" >
-            <label th:text="#{movie.seletor}"></label>
+            <label th:text="#{reservation.seletor}"></label>
             <select th:field="*{id}" class="form-control">
                 <option th:each="item : ${reservationList}" th:text="${item.getName()} + ${item.getMovieTitle()}" th:value="${item.getId()}"></option>
             </select>

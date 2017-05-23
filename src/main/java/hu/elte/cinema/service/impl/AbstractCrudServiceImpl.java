@@ -54,6 +54,7 @@ public abstract class AbstractCrudServiceImpl<EntityType extends ModelInterface<
 
     @Override
     public DtoType findById(IdType id) {
+        Objects.requireNonNull(id, "The id to be found must not be null");
         EntityType entity = dao.findById(id);
         DtoType result = conversionService.convert(entity, dtoTypeClass);
         return result;

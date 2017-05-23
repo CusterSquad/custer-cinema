@@ -23,7 +23,7 @@
     <form action="#" id="modifyMovieForm" th:action="@{/modifyMovie}" th:object="${movieDto}" method="post">
         <div class="form-group">
             <label th:text="#{movie.title}"></label>
-            <input type="text" class="form-control" th:field="*{title}"/>
+            <input type="text" class="form-control" th:field="*{title}" required />
         </div>
         <div class="form-group">
             <label th:text="#{movie.id}"></label>
@@ -33,20 +33,20 @@
             <label th:text="#{movie.dubbed}"></label>
             <div class="form-select" th:each="item : ${dubList}">
                 <label th:text="${item}"></label>
-                <input type="checkbox" th:field="*{dubbed}" th:value="${item}" />
+                <input type="checkbox" th:field="*{dubbed}" th:value="${item}" required />
             </div>
         </div>
         <div class="form-group">
             <label th:text="#{movie.director}"></label>
-            <input type="text" class="form-control" th:field="*{director}"/>
+            <input type="text" class="form-control" th:field="*{director}" required />
         </div>
         <div class="form-group">
             <label th:text="#{movie.story}"></label>
-            <input type="text" class="form-control" th:field="*{story}"/>
+            <input type="text" class="form-control" th:field="*{story}" required />
         </div>
         <div class="form-group">
             <label th:text="#{movie.length}"></label>
-            <input type="number" class="form-control" th:field="*{length}"/>
+            <input type="number" class="form-control" th:field="*{length}" required />
         </div>
         <div class="form-group">
             <label th:text="#{movie.limit}"></label>
@@ -56,11 +56,11 @@
         </div>
         <div class="form-group">
             <label th:text="#{movie.maxscreening}"></label>
-            <input type="number" class="form-control" th:field="*{maxScreenNumber}"/>
+            <input type="number" class="form-control" th:field="*{maxScreenNumber}" required />
         </div>
         <div class="form-group">
             <label th:text="#{movie.ticketsold}"></label>
-            <input type="number" class="form-control" th:field="*{ticketSold}" />
+            <input type="number" class="form-control" th:field="*{ticketSold}" required />
         </div>
         <div class="form-group">
             <input type="submit" class="btn btn-default" value="Submit" />

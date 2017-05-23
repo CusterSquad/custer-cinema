@@ -6,6 +6,7 @@ import hu.elte.cinema.dto.SimpleDto;
 import hu.elte.cinema.model.Movie;
 import hu.elte.cinema.response.CustomResponse;
 import hu.elte.cinema.response.ResponseEnum;
+import hu.elte.cinema.util.ModelAndViewUtil;
 import hu.elte.cinema.util.ServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,41 +24,48 @@ public class MovieController {
     @Autowired
     private ServiceProvider serviceProvider;
 
+    
     @RequestMapping(value = "/modifyMovie", method = RequestMethod.POST)
     public ModelAndView modifyMovie(@ModelAttribute("movieDto")MovieDto movieDto, BindingResult errors, Model model) {
-        CustomResponse result = serviceProvider.getService(Movie.class).update(movieDto);
-        if(result.getResponseEnum() == ResponseEnum.SUCCESS) {
-            return new ModelAndView("success");
+        CustomResponse response = serviceProvider.getService(Movie.class).update(movieDto);
+        if(response.getResponseEnum() == ResponseEnum.SUCCESS) {
+            return ModelAndViewUtil.getView("success");
         } else {
-            return new ModelAndView("error");
+            return ModelAndViewUtil.getView("error", response.getMessage());
         }
 
     }
+
     @RequestMapping(value = "/getMovieById", method = RequestMethod.POST)
     public ModelAndView getMovieById(@ModelAttribute("simpleDto") SimpleDto simpleDto, BindingResult errors, Model model) {
-        MovieDto result = (MovieDto) serviceProvider.getService(Movie.class).findById(simpleDto.getId()).getData();
-        ModelAndView mav = new ModelAndView("modifymovie");
-        mav.addObject("movieDto", result);
-        mav.addObject("dubList", selectorProperties.getDubbedSelectorList());
-        mav.addObject("limitList", selectorProperties.getAgeLimitSelectorList());
-        return mav;
+        CustomResponse response = serviceProvider.getService(Movie.class).findById(simpleDto.getId());
+        if(response.getResponseEnum() == ResponseEnum.SUCCESS) {
+            MovieDto result = (MovieDto) response.getData();
+            ModelAndView mav = new ModelAndView("modifymovie");
+            mav.addObject("movieDto", result);
+            mav.addObject("dubList", selectorProperties.getDubbedSelectorList());
+            mav.addObject("limitList", selectorProperties.getAgeLimitSelectorList());
+            return mav;
+        } else {
+            return ModelAndViewUtil.getView("error", response.getMessage());
+        }
     }
     @RequestMapping(value = "/saveMovie", method = RequestMethod.POST)
     public ModelAndView saveMovie(@ModelAttribute("movieDto") MovieDto movieDto, BindingResult errors, Model model) {
         CustomResponse response = serviceProvider.getService(Movie.class).create(movieDto);
         if(response.getResponseEnum() == ResponseEnum.SUCCESS) {
-            return new ModelAndView("success");
+            return ModelAndViewUtil.getView("success");
         } else {
-            return new ModelAndView("error");
+            return ModelAndViewUtil.getView("error", response.getMessage());
         }
     }
     @RequestMapping(value = "/deleteMovieById", method = RequestMethod.POST)
     public ModelAndView deleteMovieById(@ModelAttribute("simpleDto")SimpleDto simpleDto, BindingResult errors, Model model) {
         CustomResponse response = serviceProvider.getService(Movie.class).delete(simpleDto);
         if(response.getResponseEnum() == ResponseEnum.SUCCESS) {
-            return new ModelAndView("success");
+            return ModelAndViewUtil.getView("success");
         } else {
-            return new ModelAndView("error");
+            return ModelAndViewUtil.getView("error", response.getMessage());
         }
     }
 }
